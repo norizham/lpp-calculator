@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LPP Calculator</title>
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       font-family: Arial, sans-serif;
@@ -30,14 +29,8 @@
       gap: 25px;
     }
 
-    .left-column {
-      flex: 1.3;
-    }
-
-    .right-column {
-      flex: 1.7;
-      text-align: right;
-    }
+    .left-column { flex: 1.3; }
+    .right-column { flex: 1.7; text-align: right; }
 
     .card {
       background: #ffffff;
@@ -48,8 +41,8 @@
 
     h1 {
       margin-top: 0;
-      margin-bottom: 0.4em;
       font-size: 1.6em;
+      margin-bottom: 6px;
     }
 
     .intro {
@@ -69,7 +62,6 @@
 
     legend {
       font-weight: bold;
-      padding: 0 4px;
       font-size: 0.95em;
       text-transform: uppercase;
       color: #111827;
@@ -80,12 +72,9 @@
       grid-template-columns: 1fr 120px;
       gap: 6px 10px;
       align-items: center;
-      margin-bottom: 5px;
     }
 
-    label {
-      font-size: 0.95em;
-    }
+    label { font-size: 0.95em; }
 
     input[type="number"] {
       width: 100%;
@@ -100,134 +89,139 @@
       background: #fef2f2;
     }
 
-    .buttons {
-      margin: 15px 0;
+    .section-subtotal {
+      font-weight: bold;
+      margin-top: 6px;
+      font-size: 0.95em;
+      color: #1f2937;
+      text-align: right;
     }
+
+    .section-subtotal span.value { color: #2563eb; }
+
+    .final-score-box {
+      background:#eef2ff;
+      border:1px solid #c7d2fe;
+      padding:10px 15px;
+      border-radius:6px;
+      margin-top:15px;
+      margin-bottom:15px;
+      font-size:1.05em;
+      font-weight:bold;
+      color:#1e3a8a;
+    }
+
+    .buttons { margin: 15px 0; }
 
     button {
       padding: 8px 16px;
-      margin-right: 10px;
       cursor: pointer;
       border-radius: 4px;
       border: 1px solid #1f6feb;
       background: #2563eb;
       color: #fff;
       font-size: 0.95em;
+      margin-right: 10px;
+      margin-bottom: 6px;
     }
 
-    button:nth-child(2) {
-      background: #ffffff;
-      color: #2563eb;
-    }
-
-    button:nth-child(3) {
-      background: #10b981;
-      border-color: #059669;
-    }
+    button:nth-child(2) { background:#fff; color:#2563eb; }
+    button:nth-child(3) { background:#10b981; border-color:#059669; }
+    button:nth-child(4) { background:#f97316; border-color:#ea580c; }
 
     .results {
-      background: #f9fafb;
-      padding: 10px 15px;
-      border-radius: 6px;
-      border: 1px solid #e5e7eb;
-      font-size: 0.95em;
-      margin-top: 10px;
+      background:#f9fafb;
+      padding:10px 15px;
+      border-radius:6px;
+      border:1px solid #e5e7eb;
+      margin-top:10px;
+      font-size:0.95em;
     }
 
-    .results p {
-      margin: 4px 0;
-    }
-
-    .highlight {
-      font-weight: bold;
-      font-size: 1.1em;
-      margin-top: 8px;
-    }
-
-    .section-subtotal {
-      font-weight: bold;
-      margin-top: 8px;
-      font-size: 0.95em;
-      color: #1f2937;
-    }
-
-    .section-subtotal span.value {
-      color: #2563eb;
-    }
+    .results p { margin:4px 0; }
 
     .right-column img {
       width: 100%;
       height: auto;
       margin-bottom: 25px;
-      border-radius: 8px;
-      padding: 6px;
-      background: #ffffff;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+      border-radius:8px;
+      padding:6px;
+      background:#fff;
+      box-shadow:0 3px 12px rgba(0,0,0,0.12);
     }
 
     .right-column img.logo {
-      width: 60%;
-      max-width: 220px;
-      margin-bottom: 20px;
+      width:60%;
+      max-width:220px;
+      margin-bottom:20px;
     }
 
     .right-column h3 {
-      margin: 0 0 6px;
-      font-size: 0.95em;
-      color: #111827;
+      margin:0 0 6px;
+      font-size:0.95em;
+      color:#111827;
     }
 
-    @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
-      }
-      .right-column {
-        text-align: center;
-      }
-      .right-column h3 {
-        text-align: center;
-      }
+    @media (max-width:900px) {
+      .container { flex-direction: column; }
+      .right-column, .right-column h3 { text-align:center; }
+    }
+
+    .disclaimer {
+      text-align:center;
+      margin-top:25px;
+      color:#6b7280;
+      font-size:0.8em;
     }
   </style>
 </head>
+
 <body>
 
 <div class="page">
 
   <div class="container">
 
-    <!-- LEFT CALCULATOR PANEL -->
+    <!-- LEFT PANEL -->
     <div class="left-column">
       <div class="card">
+
         <h1>LPP Calculator</h1>
-        <p>Please enter scores in the range of 0-100.</p>
+        <p>Please enter scores in the range of 0-100 (for X and M) and 0-10 (for Y and CPD).</p>
+
         <ul class="intro">
-          <li><strong>X1</strong>: Quantitative output (publications, grants, supervision, teaching)</li>
-          <li><strong>X2</strong>: Quality of publications and grants</li>
-          <li><strong>M3–M5</strong>: Leadership, consultancy, and service (best 2 of 3)</li>
-          <li><strong>Y</strong>: Work output and impact (narrative)</li>
-          <li><strong>Z</strong>: CPD activities</li>
+          <li><strong>X1</strong>: M1 Quantity</li>
+          <li><strong>X2</strong>: M1 Quality</li>
+          <li><strong>M3, M4 & M5</strong>: Leadership, consultancy, service (best of 2)</li>
+          <li><strong>Y</strong>: Work output and impact (0-10 each, total 20)</li>
+          <li><strong>Z</strong>: CPD (0-10)</li>
         </ul>
 
         <!-- X1 -->
         <fieldset>
-          <legend>X1 - Quantitative Component (max 60)</legend>
+          <legend>X1 - M1 & M2 Quantity ( /60)</legend>
           <div class="grid">
-            <label>X1: M1 Q1 and Q2 (C4)</label>
-            <input id="x1_q1q2" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>M1 Publication Q1 / Q2 (0-100)</label>
+            <input id="x1_q1q2" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>X1: M1 Q1 to Q4 (C5)</label>
-            <input id="x1_q1q4" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>M1 Publication Q1 / Q4 (0-100)</label>
+            <input id="x1_q1q4" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>X1: M1 Grants (C6)</label>
-            <input id="x1_geran" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>Research Grants (0-100)</label>
+            <input id="x1_geran" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>X1: M2 Supervision (C7)</label>
-            <input id="x1_penyeliaan" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>Supervision (0-100)</label>
+            <input id="x1_penyeliaan" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>X1: M2 Teaching (C8)</label>
-            <input id="x1_pengajaran" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>Teaching (0-100)</label>
+            <input id="x1_pengajaran" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
           </div>
+
           <p class="section-subtotal" id="x1Subtotal">
             X1 subtotal: <span class="value">0.00</span> / 60
           </p>
@@ -235,35 +229,43 @@
 
         <!-- X2 -->
         <fieldset>
-          <legend>X2 - Publication Quality and Grants (max 40)</legend>
+          <legend>X2 - M1 Quality ( /40)</legend>
           <div class="grid">
-            <label>X2: Publication Quality 1 (C10)</label>
-            <input id="x2_pub1" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label> M1 Publication Quality Q1 / Q2 (0-100)</label>
+            <input id="x2_pub1" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>X2: Publication Quality 2 (C11)</label>
-            <input id="x2_pub2" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>M1 Publication Quality Q1 / Q4 (0-100)</label>
+            <input id="x2_pub2" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>X2: Grant Quality (C12)</label>
-            <input id="x2_geran" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>Grant Quality (0-100)</label>
+            <input id="x2_geran" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
           </div>
+
           <p class="section-subtotal" id="x2Subtotal">
             X2 subtotal: <span class="value">0.00</span> / 40
           </p>
         </fieldset>
 
-        <!-- M3–M5 -->
+        <!-- M3-M5 -->
         <fieldset>
-          <legend>M3, M4, M5 - Qualitative Component (max 28)</legend>
+          <legend>M3, M4, M5 - Quantity ( /28)</legend>
           <div class="grid">
-            <label>M3 - Academic Leadership</label>
-            <input id="m3" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>M3 Leadership (0-100)</label>
+            <input id="m3" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>M4 - Consultancy (if applicable)</label>
-            <input id="m4" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>M4 Consultancy (0-100)</label>
+            <input id="m4" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>M5 - Service to University</label>
-            <input id="m5" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>M5 Service (0-100)</label>
+            <input id="m5" type="number" min="0" max="100" value="0"
+                   title="Enter a value between 0 and 100" oninput="calculateLPP()">
           </div>
+
           <p class="section-subtotal" id="mSubtotal">
             M3-M5 subtotal (best 2): <span class="value">0.00</span> / 28
           </p>
@@ -271,14 +273,17 @@
 
         <!-- Y -->
         <fieldset>
-          <legend>Y - Work Output and Impact (max 20)</legend>
+          <legend>Y - Outcome & Narrative ( /20)</legend>
           <div class="grid">
-            <label>Y1 - Work Output</label>
-            <input id="y1" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>Y1 Output (0-10)</label>
+            <input id="y1" type="number" min="0" max="10" value="0"
+                   title="Enter a value between 0 and 10" oninput="calculateLPP()">
 
-            <label>Y2 - Impact Narrative</label>
-            <input id="y2" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>Y2 Impact (0-10)</label>
+            <input id="y2" type="number" min="0" max="10" value="0"
+                   title="Enter a value between 0 and 10" oninput="calculateLPP()">
           </div>
+
           <p class="section-subtotal" id="ySubtotal">
             Y subtotal: <span class="value">0.00</span> / 20
           </p>
@@ -286,26 +291,34 @@
 
         <!-- CPD -->
         <fieldset>
-          <legend>Z - CPD (max 10)</legend>
+          <legend>Z - CPD ( /10)</legend>
           <div class="grid">
-            <label>CPD Score</label>
-            <input id="cpd" type="number" min="0" max="100" value="0" oninput="calculateLPP()">
+            <label>CPD Score (0-10)</label>
+            <input id="cpd" type="number" min="0" max="10" value="0"
+                   title="Enter a value between 0 and 10" oninput="calculateLPP()">
           </div>
+
           <p class="section-subtotal" id="cpdSubtotal">
             CPD subtotal: <span class="value">0.00</span> / 10
           </p>
         </fieldset>
+
+        <!-- FINAL SCORE BELOW Z -->
+        <div class="final-score-box">
+          <p id="finalScoreTop">FINAL LPP SCORE: 0.00 / 100</p>
+        </div>
 
         <!-- Buttons -->
         <div class="buttons">
           <button onclick="calculateLPP()">Calculate</button>
           <button onclick="resetForm()">Clear outputs</button>
           <button onclick="resetToZero()">Reset inputs to zero</button>
+          <button onclick="setAllToMax()">Set all inputs to max</button>
         </div>
 
-        <!-- Results -->
+        <!-- Detailed Results -->
         <div class="results" id="results">
-          <h3>Results</h3>
+          <h3>Detailed Results</h3>
           <p id="x1Result"></p>
           <p id="x2Result"></p>
           <p id="comp42Result"></p>
@@ -314,51 +327,49 @@
           <p id="y1y2Result"></p>
           <p id="cpdResult"></p>
           <p id="breakdownResult"></p>
-          <p class="highlight" id="finalResult"></p>
+          <p id="finalResult"></p>
         </div>
 
       </div>
+
+      <!-- Disclaimer -->
+      <p class="disclaimer">
+        Disclaimer: This calculator is provided as-is. Use at your own risk.
+      </p>
+
     </div>
 
     <!-- RIGHT IMAGES -->
     <div class="right-column">
-      <img src="logo.png" alt="Logo" class="logo">
+      <img src="logo.png" class="logo" alt="Logo">
 
       <h3>Publication Marks</h3>
-      <img src="pub_table.png" alt="Publication Table" class="table-img">
-
-      <h3>Grant Marks</h3>
-      <img src="grant_table.png" alt="Grant Table" class="table-img">
+      <img src="pub_table.png" class="table-img" alt="Publication Table">
     </div>
 
   </div>
-
 </div>
 
 <script>
-  // Clamp value 0-100, mark error if user typed out of range
+  // Clamp values: 0-100 for most, 0-10 for Y1, Y2, CPD
   function val(id) {
     var el = document.getElementById(id);
     var v = parseFloat(el.value);
+
+    // Y1, Y2, CPD use 0-10; others use 0-100
+    var maxVal = (id === 'y1' || id === 'y2' || id === 'cpd') ? 10 : 100;
+
     var outOfRange = false;
 
     if (isNaN(v)) v = 0;
     if (v < 0) { v = 0; outOfRange = true; }
-    if (v > 100) { v = 100; outOfRange = true; }
+    if (v > maxVal) { v = maxVal; outOfRange = true; }
 
     if (outOfRange) el.classList.add('error');
     else el.classList.remove('error');
 
     el.value = v;
     return v;
-  }
-
-  function ratingFromScore(score) {
-    if (score >= 90) return 'Outstanding';
-    if (score >= 80) return 'Excellent';
-    if (score >= 70) return 'Good';
-    if (score >= 60) return 'Satisfactory';
-    return 'Needs Improvement';
   }
 
   function calculateLPP() {
@@ -391,37 +402,40 @@
     // Quantitative component (42%)
     var comp42 = ((x1Raw + x2Raw) / 100) * 42;
 
-    // M3–M5 best 2 of 3
-    var arr = [val('m3'), val('m4'), val('m5')];
-    arr.sort(function(a, b) { return b - a; });
+    // M3-M5 best 2 of 3
+    var arr = [val('m3'), val('m4'), val('m5')].sort(function(a,b){return b-a;});
     var mBestAvg = (arr[0] + arr[1]) / 2;
     var mScore = (mBestAvg / 100) * 28;
 
     document.getElementById('mSubtotal').innerHTML =
       'M3-M5 subtotal (best 2): <span class="value">' + r(mScore) + '</span> / 28';
 
-    // Total X (70%)
-    var totalX = comp42 + mScore;
+    var totalX = comp42 + mScore; // up to 70
 
-    // Y
-    var yTotal = (val('y1') / 100) * 10 + (val('y2') / 100) * 10;
+    // Y: each 0-10, total 0-20
+    var y1v = val('y1');
+    var y2v = val('y2');
+    var yTotal = y1v + y2v;
 
     document.getElementById('ySubtotal').innerHTML =
       'Y subtotal: <span class="value">' + r(yTotal) + '</span> / 20';
 
-    // CPD
-    var cpdScore = (val('cpd') / 100) * 10;
+    // CPD: 0-10
+    var cpdScore = val('cpd');
 
     document.getElementById('cpdSubtotal').innerHTML =
       'CPD subtotal: <span class="value">' + r(cpdScore) + '</span> / 10';
 
-    // Final total
+    // FINAL TOTAL
     var finalTotal = totalX + yTotal + cpdScore;
-    var rating = ratingFromScore(finalTotal);
 
-    // Detailed results
+    // Top final score
+    document.getElementById('finalScoreTop').textContent =
+      'FINAL LPP SCORE: ' + r(finalTotal) + ' / 100';
+
+    // Detailed panel
     document.getElementById('x1Result').textContent =
-      'X1 = ' + r(x1Raw) + ' / 60 (average input = ' + r(x1Avg) + ')';
+      'X1 = ' + r(x1Raw) + ' / 60 (avg input = ' + r(x1Avg) + ')';
 
     document.getElementById('x2Result').textContent =
       'X2 = ' + r(x2Raw) + ' / 40';
@@ -436,7 +450,7 @@
       'Total X = ' + r(totalX) + ' / 70';
 
     document.getElementById('y1y2Result').textContent =
-      'Y1 + Y2 = ' + r(yTotal) + ' / 20';
+      'Y total = ' + r(yTotal) + ' / 20';
 
     document.getElementById('cpdResult').textContent =
       'CPD = ' + r(cpdScore) + ' / 10';
@@ -444,16 +458,18 @@
     document.getElementById('breakdownResult').textContent =
       'Contribution: X = ' + r(totalX) +
       ', Y = ' + r(yTotal) +
-      ', Z = ' + r(cpdScore) +
-      ' (sum = ' + r(finalTotal) + ')';
+      ', Z = ' + r(cpdScore);
 
     document.getElementById('finalResult').textContent =
-      'FINAL LPP SCORE = ' + r(finalTotal) + ' / 100 (' + rating + ')';
+      'FINAL LPP SCORE = ' + r(finalTotal) + ' / 100';
   }
 
   function resetForm() {
-    var ps = document.getElementById('results').querySelectorAll('p');
-    ps.forEach(function(p) { p.textContent = ''; });
+    var ps = document.querySelectorAll('#results p');
+    ps.forEach(function(p){ p.textContent = ''; });
+
+    document.getElementById('finalScoreTop').textContent =
+      'FINAL LPP SCORE: 0.00 / 100';
 
     document.getElementById('x1Subtotal').innerHTML =
       'X1 subtotal: <span class="value">0.00</span> / 60';
@@ -469,15 +485,27 @@
 
   function resetToZero() {
     var inputs = document.querySelectorAll('input[type="number"]');
-    inputs.forEach(function(i) { i.value = 0; i.classList.remove('error'); });
+    inputs.forEach(function(i){
+      i.value = 0;
+      i.classList.remove('error');
+    });
     resetForm();
     calculateLPP();
   }
 
-  // Initialize once on load so subtotals and results panel are consistent
-  window.addEventListener('DOMContentLoaded', function() {
-    resetToZero();
-  });
+  function setAllToMax() {
+    var inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(function(i){
+      var id = i.id;
+      var maxVal = (id === 'y1' || id === 'y2' || id === 'cpd') ? 10 : 100;
+      i.value = maxVal;
+      i.classList.remove('error');
+    });
+    resetForm();
+    calculateLPP();
+  }
+
+  window.addEventListener('DOMContentLoaded', resetToZero);
 </script>
 
 </body>
