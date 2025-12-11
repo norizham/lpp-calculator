@@ -5,7 +5,7 @@
   <title>LPP Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Chart.js for X/Y/Z bar chart -->
+  <!-- Chart.js for bar chart -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
@@ -81,10 +81,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-    }
-
-    h2.section-title span.icon {
-      font-size: 1.2em;
     }
 
     .intro-list {
@@ -320,10 +316,6 @@
       font-size: 0.8em;
     }
 
-    .right-card h2 span.icon {
-      font-size: 1.1em;
-    }
-
     .card-toggle {
       margin-left: auto;
       font-size: 0.9em;
@@ -389,25 +381,24 @@
       <div class="card">
 
         <h2 class="section-title">
-          <span class="icon">🧮</span>
           <span>Main Calculator</span>
         </h2>
 
         <ul class="intro-list">
-          <li><strong>X1</strong>: Quantitative output (max 60)</li>
-          <li><strong>X2</strong>: Publication &amp; grant quality (max 40)</li>
-          <li><strong>M3–M5</strong>: Leadership, consultancy, service (best 2 → max 28)</li>
-          <li><strong>Y</strong>: Output &amp; impact (0–10 each → max 20)</li>
-          <li><strong>Z</strong>: CPD (0–10 → max 10)</li>
+          <li><strong>X1</strong>: M1 and M2 quantity output (max 60)</li>
+          <li><strong>X2</strong>: M1 quality publication and grant (max 40)</li>
+          <li><strong>M3 to M5</strong>: Recognition, income generation, service (best 2 -> max 28)</li>
+          <li><strong>Y</strong>: Output and impact (0-10 each -> max 20)</li>
+          <li><strong>Z</strong>: CPD (0-10 -> max 10)</li>
         </ul>
 
         <!-- CASE SELECTOR -->
         <fieldset>
-          <legend>M1 &amp; M2 Requirements (Select Case)</legend>
+          <legend>M1 and M2 requirements (select case)</legend>
 
-          <label for="mCase"><strong>Select Academic Case:</strong></label>
+          <label for="mCase"><strong>Select academic case:</strong></label>
           <select id="mCase" onchange="onCaseChange()" style="width:100%; padding:6px; margin-top:6px; border-radius:6px; border:1px solid #cbd5e1;">
-            <option value="">-- Choose Case --</option>
+            <option value="">-- Choose case --</option>
             <option value="DS11">DS 11</option>
             <option value="DS13">DS 13</option>
             <option value="DS14">DS 14</option>
@@ -428,9 +419,9 @@
 
         <!-- X1 -->
         <fieldset>
-          <legend>X1 - Quantitative (max 60)</legend>
+          <legend>X1 - M1 and M2 quantity (max 60)</legend>
           <div class="grid">
-            <label>M1 Q1 &amp; Q2 (0-100)</label>
+            <label>M1 Q1 and Q2 (0-100)</label>
             <input id="x1_q1q2" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
@@ -458,17 +449,17 @@
 
         <!-- X2 -->
         <fieldset>
-          <legend>X2 - Publication &amp; Grant Quality (max 40)</legend>
+          <legend>X2 - M1 publication and grant quality (max 40)</legend>
           <div class="grid">
-            <label>Publication Quality 1 (0-100)</label>
+            <label>Publication quality 1 (0-100)</label>
             <input id="x2_pub1" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>Publication Quality 2 (0-100)</label>
+            <label>Publication quality 2 (0-100)</label>
             <input id="x2_pub2" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>Grant Quality (0-100)</label>
+            <label>Grant quality (0-100)</label>
             <input id="x2_geran" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
           </div>
@@ -480,17 +471,17 @@
 
         <!-- M3-M5 -->
         <fieldset>
-          <legend>M3, M4, M5 - Qualitative (max 28)</legend>
+          <legend>M3, M4, M5 - qualitative (max 28)</legend>
           <div class="grid">
-            <label>M3 Leadership (0-100)</label>
+            <label>M3 leadership (0-100)</label>
             <input id="m3" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>M4 Consultancy (0-100)</label>
+            <label>M4 consultancy (0-100)</label>
             <input id="m4" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>M5 Service (0-100)</label>
+            <label>M5 service (0-100)</label>
             <input id="m5" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
           </div>
@@ -502,13 +493,13 @@
 
         <!-- Y -->
         <fieldset>
-          <legend>Y - Output &amp; Impact (max 20)</legend>
+          <legend>Y - output and impact (max 20)</legend>
           <div class="grid">
-            <label>Y1 Output (0-10)</label>
+            <label>Y1 output (0-10)</label>
             <input id="y1" type="number" min="0" max="10" value="0"
                    title="Enter a value between 0 and 10" oninput="calculateLPP()">
 
-            <label>Y2 Impact (0-10)</label>
+            <label>Y2 impact (0-10)</label>
             <input id="y2" type="number" min="0" max="10" value="0"
                    title="Enter a value between 0 and 10" oninput="calculateLPP()">
           </div>
@@ -522,7 +513,7 @@
         <fieldset>
           <legend>Z - CPD (max 10)</legend>
           <div class="grid">
-            <label>CPD Score (0-10)</label>
+            <label>CPD score (0-10)</label>
             <input id="cpd" type="number" min="0" max="10" value="0"
                    title="Enter a value between 0 and 10" oninput="calculateLPP()">
           </div>
@@ -544,15 +535,15 @@
 
         <!-- BUTTONS -->
         <div class="buttons">
-          <button onclick="calculateLPP()"><span>▶</span><span>Calculate</span></button>
-          <button class="secondary" onclick="resetForm()"><span>🧹</span><span>Clear outputs</span></button>
-          <button class="success" onclick="resetToZero()"><span>⟳</span><span>Reset inputs to zero</span></button>
-          <button class="warning" onclick="setAllToMax()"><span>⬆</span><span>Set all inputs to max</span></button>
+          <button onclick="calculateLPP()"><span>Calculate</span></button>
+          <button class="secondary" onclick="resetForm()"><span>Clear outputs</span></button>
+          <button class="success" onclick="resetToZero()"><span>Reset inputs to zero</span></button>
+          <button class="warning" onclick="setAllToMax()"><span>Set all inputs to max</span></button>
         </div>
 
         <!-- RESULTS -->
         <div class="results" id="results">
-          <h3>Detailed Results</h3>
+          <h3>Detailed results</h3>
           <p id="x1Result"></p>
           <p id="x2Result"></p>
           <p id="comp42Result"></p>
@@ -563,7 +554,7 @@
           <p id="breakdownResult"></p>
           <p id="finalResult"></p>
 
-          <canvas id="xyzChart" style="margin-top:8px; max-height:180px;"></canvas>
+          <canvas id="xyzChart" style="margin-top:8px; max-height:200px;"></canvas>
         </div>
 
       </div>
@@ -579,9 +570,8 @@
       <!-- PUBLICATION TABLE -->
       <div class="right-card">
         <h2 onclick="toggleCard('pubCardBody','pubCardToggle')">
-          <span class="icon">📚</span>
-          <span>Publication Quality Marks (M1 – X2)</span>
-          <span class="card-toggle" id="pubCardToggle">▼</span>
+          <span>Publication quality marks (M1 - X2)</span>
+          <span class="card-toggle" id="pubCardToggle">[v]</span>
         </h2>
         <small>Use this as a reference when assigning publication scores in X1 and X2.</small>
         <div id="pubCardBody">
@@ -589,7 +579,7 @@
             <thead>
               <tr>
                 <th>Rank</th>
-                <th>Database / Output</th>
+                <th>Database / output</th>
                 <th>Role</th>
                 <th>Marks</th>
               </tr>
@@ -597,80 +587,80 @@
             <tbody>
               <tr>
                 <td>1</td>
-                <td>Index Journal Q1/Q2 WOS / Scopus</td>
-                <td>First / Corresponding / Sole Author</td>
+                <td>Index journal Q1 or Q2 WOS / Scopus</td>
+                <td>First / corresponding / sole author</td>
                 <td>100</td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>Research Book (Index / MAPIM)</td>
-                <td>First Author</td>
+                <td>Research book (index / MAPIM)</td>
+                <td>First author</td>
                 <td>100</td>
               </tr>
               <tr>
                 <td>3</td>
-                <td>Index Journal Q3/Q4 WOS / Scopus</td>
-                <td>First / Corresponding / Sole Author</td>
+                <td>Index journal Q3 or Q4 WOS / Scopus</td>
+                <td>First / corresponding / sole author</td>
                 <td>70</td>
               </tr>
               <tr>
                 <td>4</td>
-                <td>Research Book (Index / MAPIM)</td>
+                <td>Research book (index / MAPIM)</td>
                 <td>Co-author</td>
                 <td>50</td>
               </tr>
               <tr>
                 <td>5</td>
-                <td>Chapter in research book (Index / MAPIM)</td>
-                <td>First Author</td>
+                <td>Chapter in research book (index / MAPIM)</td>
+                <td>First author</td>
                 <td>50</td>
               </tr>
               <tr>
                 <td>6</td>
-                <td>Chapter in research book (Index / MAPIM)</td>
+                <td>Chapter in research book (index / MAPIM)</td>
                 <td>Co-author</td>
                 <td>25</td>
               </tr>
               <tr>
                 <td>7</td>
-                <td>Index Journal other than WOS and Scopus (ERA / MyCite)</td>
-                <td>First / Corresponding / Sole Author</td>
+                <td>Index journal other than WOS and Scopus (ERA / MyCite)</td>
+                <td>First / corresponding / sole author</td>
                 <td>50</td>
               </tr>
               <tr>
                 <td>8</td>
-                <td>Index Journal Q1/Q2 WOS / Scopus</td>
+                <td>Index journal Q1 or Q2 WOS / Scopus</td>
                 <td>Co-author</td>
                 <td>40</td>
               </tr>
               <tr>
                 <td>9</td>
-                <td>Index Journal Q3/Q4 WOS / Scopus</td>
+                <td>Index journal Q3 or Q4 WOS / Scopus</td>
                 <td>Co-author</td>
                 <td>30</td>
               </tr>
               <tr>
                 <td>10</td>
-                <td>Index Journal other than WOS and Scopus (ERA / MyCite)</td>
+                <td>Index journal other than WOS and Scopus (ERA / MyCite)</td>
                 <td>Co-author</td>
                 <td>30</td>
               </tr>
               <tr>
                 <td>11</td>
-                <td>Non Index Journal</td>
-                <td>First / Corresponding / Sole Author</td>
+                <td>Non index journal</td>
+                <td>First / corresponding / sole author</td>
                 <td>30</td>
               </tr>
               <tr>
                 <td>12</td>
-                <td>Indexed Proceedings</td>
-                <td>First / Corresponding / Sole Author</td>
+                <td>Indexed proceedings</td>
+                <td>First / corresponding / sole author</td>
                 <td>10</td>
               </tr>
             </tbody>
           </table>
           <div class="badge-note">
-            Note: Use WOS and Scopus together to classify Q1–Q4 journals.
+            Note: Use WOS and Scopus together to classify Q1 to Q4 journals.
           </div>
         </div>
       </div>
@@ -678,9 +668,8 @@
       <!-- GRANT TABLE -->
       <div class="right-card">
         <h2 onclick="toggleCard('grantCardBody','grantCardToggle')">
-          <span class="icon">💰</span>
-          <span>Grant Marks (M1 – X2)</span>
-          <span class="card-toggle" id="grantCardToggle">▼</span>
+          <span>Grant marks (M1 - X2)</span>
+          <span class="card-toggle" id="grantCardToggle">[v]</span>
         </h2>
         <small>Reference for assigning grant-related marks in X1 and X2.</small>
         <div id="grantCardBody">
@@ -688,24 +677,24 @@
             <thead>
               <tr>
                 <th>No.</th>
-                <th>Grant Status</th>
+                <th>Grant status</th>
                 <th>Marks</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>1</td>
-                <td>Grant received / active as Main Researcher</td>
+                <td>Grant received / active as main researcher</td>
                 <td>100</td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>Grant applied as Main Researcher</td>
+                <td>Grant applied as main researcher</td>
                 <td>40</td>
               </tr>
               <tr>
                 <td>3</td>
-                <td>Grant received / active as Co-Researcher</td>
+                <td>Grant received / active as co-researcher</td>
                 <td>30</td>
               </tr>
             </tbody>
@@ -726,14 +715,14 @@
   var CASE_CONFIG = {
     "DS11": {
       description: `
-        <strong>M1 (Research/Publications)</strong><br>
-        • 1 × Q1/Q2 WOS journal (Corresponding author – published)<br>
-        • 1 × Q3/Q4 WOS/Scopus journal (Corresponding author – published)<br>
-        • 1 × Research Grant (Project Leader, active)<br><br>
-        <strong>M2 (Teaching/Supervision)</strong><br>
-        • 5 hours academic teaching (UG/PG course/lab)<br>
-        • 1 × PG Supervision (active)<br><br>
-        <em>Auto-filled marks represent a reasonable target profile; adjust as needed.</em>
+        <strong>M1 (research and publications)</strong><br>
+        - 1 x Q1 or Q2 WOS journal (corresponding author, published)<br>
+        - 1 x Q3 or Q4 WOS or Scopus journal (corresponding author, published)<br>
+        - 1 x research grant (project leader, active)<br><br>
+        <strong>M2 (teaching and supervision)</strong><br>
+        - 5 hours academic teaching (UG or PG course or lab)<br>
+        - 1 x PG supervision (active)<br><br>
+        <em>Auto-filled marks represent a reasonable target profile. Adjust as needed.</em>
       `,
       autofill: {
         x1_q1q2: 80,
@@ -752,14 +741,14 @@
     },
     "DS13": {
       description: `
-        <strong>M1 (Research/Publications)</strong><br>
-        • 1 × Q1/Q2 WOS journal (Corresponding author – published)<br>
-        • 1 × Q3/Q4 WOS/Scopus journal (Corresponding author – published)<br>
-        • 1 × Research Grant (Project Leader, active)<br><br>
-        <strong>M2 (Teaching/Supervision)</strong><br>
-        • 5 hours academic teaching (UG/PG course/lab)<br>
-        • 1 × PG Supervision (active)<br><br>
-        <em>Auto-filled marks represent a reasonable target profile; adjust as needed.</em>
+        <strong>M1 (research and publications)</strong><br>
+        - 1 x Q1 or Q2 WOS journal (corresponding author, published)<br>
+        - 1 x Q3 or Q4 WOS or Scopus journal (corresponding author, published)<br>
+        - 1 x research grant (project leader, active)<br><br>
+        <strong>M2 (teaching and supervision)</strong><br>
+        - 5 hours academic teaching (UG or PG course or lab)<br>
+        - 1 x PG supervision (active)<br><br>
+        <em>Auto-filled marks represent a reasonable target profile. Adjust as needed.</em>
       `,
       autofill: {
         x1_q1q2: 80,
@@ -778,13 +767,13 @@
     },
     "DS14": {
       description: `
-        <strong>M1 (Research/Publications)</strong><br>
-        • 2 × Q1/Q2 WOS journals (Corresponding author – published)<br>
-        • 1 × Research Grant (Project Leader, active)<br><br>
-        <strong>M2 (Teaching/Supervision)</strong><br>
-        • 5 hours academic teaching (UG/PG course/lab)<br>
-        • 1 × PG Supervision (active)<br><br>
-        <em>Auto-filled marks represent a higher target profile for senior staff; adjust as needed.</em>
+        <strong>M1 (research and publications)</strong><br>
+        - 2 x Q1 or Q2 WOS journals (corresponding author, published)<br>
+        - 1 x research grant (project leader, active)<br><br>
+        <strong>M2 (teaching and supervision)</strong><br>
+        - 5 hours academic teaching (UG or PG course or lab)<br>
+        - 1 x PG supervision (active)<br><br>
+        <em>Auto-filled marks represent a higher target profile for senior staff. Adjust as needed.</em>
       `,
       autofill: {
         x1_q1q2: 90,
@@ -803,13 +792,13 @@
     },
     "Khas": {
       description: `
-        <strong>M1 (Research/Publications)</strong><br>
-        • 2 × Q1/Q2 WOS journals (Corresponding author – published)<br>
-        • 1 × Research Grant (Project Leader, active)<br><br>
-        <strong>M2 (Teaching/Supervision)</strong><br>
-        • 5 hours academic teaching (UG/PG course/lab)<br>
-        • 1 × PG Supervision (active)<br><br>
-        <em>Auto-filled marks represent a higher target profile for special cases; adjust as needed.</em>
+        <strong>M1 (research and publications)</strong><br>
+        - 2 x Q1 or Q2 WOS journals (corresponding author, published)<br>
+        - 1 x research grant (project leader, active)<br><br>
+        <strong>M2 (teaching and supervision)</strong><br>
+        - 5 hours academic teaching (UG or PG course or lab)<br>
+        - 1 x PG supervision (active)<br><br>
+        <em>Auto-filled marks represent a higher target profile for special cases. Adjust as needed.</em>
       `,
       autofill: {
         x1_q1q2: 90,
@@ -830,31 +819,31 @@
 
   function fieldLabel(id) {
     switch (id) {
-      case 'x1_q1q2': return 'M1 Q1 & Q2 (0-100)';
-      case 'x1_q1q4': return 'M1 Q1 to Q4 (0-100)';
-      case 'x1_geran': return 'Grants (0-100)';
-      case 'x1_penyeliaan': return 'Supervision (0-100)';
-      case 'x1_pengajaran': return 'Teaching (0-100)';
+      case "x1_q1q2": return "M1 Q1 and Q2 (0-100)";
+      case "x1_q1q4": return "M1 Q1 to Q4 (0-100)";
+      case "x1_geran": return "Grants (0-100)";
+      case "x1_penyeliaan": return "Supervision (0-100)";
+      case "x1_pengajaran": return "Teaching (0-100)";
       default: return id;
     }
   }
 
   function onCaseChange() {
-    var sel = document.getElementById('mCase').value;
-    var infoBox = document.getElementById('caseInfo');
-    var valBox = document.getElementById('caseValidation');
-    valBox.textContent = '';
-    valBox.classList.remove('ok');
+    var sel = document.getElementById("mCase").value;
+    var infoBox = document.getElementById("caseInfo");
+    var valBox = document.getElementById("caseValidation");
+    valBox.textContent = "";
+    valBox.classList.remove("ok");
 
     if (!sel || !CASE_CONFIG[sel]) {
-      infoBox.style.display = 'none';
-      infoBox.innerHTML = '';
+      infoBox.style.display = "none";
+      infoBox.innerHTML = "";
       calculateLPP();
       return;
     }
 
     var cfg = CASE_CONFIG[sel];
-    infoBox.style.display = 'block';
+    infoBox.style.display = "block";
     infoBox.innerHTML = cfg.description;
 
     // Auto-fill suggested marks for M1 and M2
@@ -862,7 +851,7 @@
       var el = document.getElementById(id);
       if (el) {
         el.value = cfg.autofill[id];
-        el.classList.remove('error');
+        el.classList.remove("error");
       }
     });
 
@@ -871,10 +860,10 @@
   }
 
   function validateCase() {
-    var sel = document.getElementById('mCase').value;
-    var valBox = document.getElementById('caseValidation');
-    valBox.textContent = '';
-    valBox.classList.remove('ok');
+    var sel = document.getElementById("mCase").value;
+    var valBox = document.getElementById("caseValidation");
+    valBox.textContent = "";
+    valBox.classList.remove("ok");
 
     if (!sel || !CASE_CONFIG[sel]) return;
 
@@ -885,15 +874,15 @@
       var current = parseFloat(document.getElementById(id).value) || 0;
       var minVal = cfgMin[id];
       if (current < minVal) {
-        messages.push('• ' + fieldLabel(id) + ': current ' + current + ', recommended minimum ' + minVal);
+        messages.push("- " + fieldLabel(id) + ": current " + current + ", recommended minimum " + minVal);
       }
     });
 
     if (messages.length === 0) {
-      valBox.textContent = 'Current marks meet or exceed the recommended minimum for case ' + sel + '.';
-      valBox.classList.add('ok');
+      valBox.textContent = "Current marks meet or exceed the recommended minimum for case " + sel + ".";
+      valBox.classList.add("ok");
     } else {
-      valBox.innerHTML = '<strong>Warning:</strong><br>' + messages.join('<br>');
+      valBox.innerHTML = "<strong>Warning:</strong><br>" + messages.join("<br>");
     }
   }
 
@@ -902,7 +891,7 @@
     var el = document.getElementById(id);
     var v = parseFloat(el.value);
 
-    var maxVal = (id === 'y1' || id === 'y2' || id === 'cpd') ? 10 : 100;
+    var maxVal = (id === "y1" || id === "y2" || id === "cpd") ? 10 : 100;
 
     var outOfRange = false;
 
@@ -910,8 +899,8 @@
     if (v < 0) { v = 0; outOfRange = true; }
     if (v > maxVal) { v = maxVal; outOfRange = true; }
 
-    if (outOfRange) el.classList.add('error');
-    else el.classList.remove('error');
+    if (outOfRange) el.classList.add("error");
+    else el.classList.remove("error");
 
     el.value = v;
     return v;
@@ -919,18 +908,22 @@
 
   var xyzChart;
 
-  function updateXYZChart(totalX, yTotal, cpdScore) {
-    var canvas = document.getElementById('xyzChart');
+  // 7-bar chart for M1, M2, M3, M4, M5, Y, Z (all 0-100 scale)
+  function updateXYZChart(m1Score, m2Score, m3Score, m4Score, m5Score, yScore, zScore) {
+    var canvas = document.getElementById("xyzChart");
     if (!canvas) return;
-    var ctx = canvas.getContext('2d');
+    var ctx = canvas.getContext("2d");
+
+    var dataArray = [m1Score, m2Score, m3Score, m4Score, m5Score, yScore, zScore];
+
     if (!xyzChart) {
       xyzChart = new Chart(ctx, {
-        type: 'bar',
+        type: "bar",
         data: {
-          labels: ['X (max 70)', 'Y (max 20)', 'Z (max 10)'],
+          labels: ["M1", "M2", "M3", "M4", "M5", "Y", "Z"],
           datasets: [{
-            label: 'Score',
-            data: [totalX, yTotal, cpdScore]
+            label: "Score (normalized to 0-100)",
+            data: dataArray
           }]
         },
         options: {
@@ -941,13 +934,13 @@
           scales: {
             y: {
               beginAtZero: true,
-              suggestedMax: 70
+              suggestedMax: 100
             }
           }
         }
       });
     } else {
-      xyzChart.data.datasets[0].data = [totalX, yTotal, cpdScore];
+      xyzChart.data.datasets[0].data = dataArray;
       xyzChart.update();
     }
   }
@@ -956,215 +949,225 @@
     var r = function(x) { return x.toFixed(2); };
 
     // X1
-    var C4 = val('x1_q1q2');
-    var C5 = val('x1_q1q4');
-    var C6 = val('x1_geran');
-    var C7 = val('x1_penyeliaan');
-    var C8 = val('x1_pengajaran');
+    var C4 = val("x1_q1q2");
+    var C5 = val("x1_q1q4");
+    var C6 = val("x1_geran");
+    var C7 = val("x1_penyeliaan");
+    var C8 = val("x1_pengajaran");
 
     var sumX1 = C4 + C5 + C6 + C7 + C8;
     var x1Raw = (sumX1 / 500) * 60;
     var x1Avg = sumX1 / 5;
 
-    document.getElementById('x1Subtotal').innerHTML =
-      'X1 subtotal: <span class="value">' + r(x1Raw) + '</span> / 60';
+    document.getElementById("x1Subtotal").innerHTML =
+      "X1 subtotal: <span class=\"value\">" + r(x1Raw) + "</span> / 60";
 
     // X2
-    var C10 = val('x2_pub1');
-    var C11 = val('x2_pub2');
-    var C12 = val('x2_geran');
+    var C10 = val("x2_pub1");
+    var C11 = val("x2_pub2");
+    var C12 = val("x2_geran");
 
     var x2Raw = ((((C10 + C11) / 200) + (C12 / 100)) / 2) * 40;
 
-    document.getElementById('x2Subtotal').innerHTML =
-      'X2 subtotal: <span class="value">' + r(x2Raw) + '</span> / 40';
+    document.getElementById("x2Subtotal").innerHTML =
+      "X2 subtotal: <span class=\"value\">" + r(x2Raw) + "</span> / 40";
 
-    // Quantitative component (42%)
+    // Quantitative component (42 percent)
     var comp42 = ((x1Raw + x2Raw) / 100) * 42;
 
-    // M3-M5 best 2
-    var arr = [val('m3'), val('m4'), val('m5')].sort(function(a,b){return b-a;});
+    // M3-M5 raw values and best 2
+    var m3v = val("m3");
+    var m4v = val("m4");
+    var m5v = val("m5");
+
+    var arr = [m3v, m4v, m5v].sort(function(a,b){return b-a;});
     var mBestAvg = (arr[0] + arr[1]) / 2;
     var mScore = (mBestAvg / 100) * 28;
 
-    document.getElementById('mSubtotal').innerHTML =
-      'M3-M5 subtotal (best 2): <span class="value">' + r(mScore) + '</span> / 28';
+    document.getElementById("mSubtotal").innerHTML =
+      "M3-M5 subtotal (best 2): <span class=\"value\">" + r(mScore) + "</span> / 28";
 
     var totalX = comp42 + mScore; // up to 70
 
     // Y
-    var y1v = val('y1');
-    var y2v = val('y2');
+    var y1v = val("y1");
+    var y2v = val("y2");
     var yTotal = y1v + y2v;
 
-    document.getElementById('ySubtotal').innerHTML =
-      'Y subtotal: <span class="value">' + r(yTotal) + '</span> / 20';
+    document.getElementById("ySubtotal").innerHTML =
+      "Y subtotal: <span class=\"value\">" + r(yTotal) + "</span> / 20";
 
     // CPD
-    var cpdScore = val('cpd');
+    var cpdScore = val("cpd");
 
-    document.getElementById('cpdSubtotal').innerHTML =
-      'CPD subtotal: <span class="value">' + r(cpdScore) + '</span> / 10';
+    document.getElementById("cpdSubtotal").innerHTML =
+      "CPD subtotal: <span class=\"value\">" + r(cpdScore) + "</span> / 10";
 
     // FINAL TOTAL
     var finalTotal = totalX + yTotal + cpdScore;
 
     // Final score text
-    document.getElementById('finalScoreTop').textContent =
-      'FINAL LPP SCORE: ' + r(finalTotal) + ' / 100';
+    document.getElementById("finalScoreTop").textContent =
+      "FINAL LPP SCORE: " + r(finalTotal) + " / 100";
 
     // Detailed results
-    document.getElementById('x1Result').textContent =
-      'X1 = ' + r(x1Raw) + ' / 60 (avg input = ' + r(x1Avg) + ')';
-    document.getElementById('x2Result').textContent =
-      'X2 = ' + r(x2Raw) + ' / 40';
-    document.getElementById('comp42Result').textContent =
-      'Quantitative Component (42%) = ' + r(comp42) + ' / 42';
-    document.getElementById('m3m4m5Result').textContent =
-      'M3-M5 (best 2 of 3) = ' + r(mScore) + ' / 28';
-    document.getElementById('totalXResult').textContent =
-      'Total X = ' + r(totalX) + ' / 70';
-    document.getElementById('y1y2Result').textContent =
-      'Y total = ' + r(yTotal) + ' / 20';
-    document.getElementById('cpdResult').textContent =
-      'CPD = ' + r(cpdScore) + ' / 10';
-    document.getElementById('breakdownResult').textContent =
-      'Contribution: X = ' + r(totalX) +
-      ', Y = ' + r(yTotal) +
-      ', Z = ' + r(cpdScore);
-    document.getElementById('finalResult').textContent =
-      'FINAL LPP SCORE = ' + r(finalTotal) + ' / 100';
+    document.getElementById("x1Result").textContent =
+      "X1 = " + r(x1Raw) + " / 60 (average input = " + r(x1Avg) + ")";
+    document.getElementById("x2Result").textContent =
+      "X2 = " + r(x2Raw) + " / 40";
+    document.getElementById("comp42Result").textContent =
+      "Quantitative component (42 percent) = " + r(comp42) + " / 42";
+    document.getElementById("m3m4m5Result").textContent =
+      "M3-M5 (best 2 of 3) = " + r(mScore) + " / 28";
+    document.getElementById("totalXResult").textContent =
+      "Total X = " + r(totalX) + " / 70";
+    document.getElementById("y1y2Result").textContent =
+      "Y total = " + r(yTotal) + " / 20";
+    document.getElementById("cpdResult").textContent =
+      "CPD = " + r(cpdScore) + " / 10";
+    document.getElementById("breakdownResult").textContent =
+      "Contribution: X = " + r(totalX) +
+      ", Y = " + r(yTotal) +
+      ", Z = " + r(cpdScore);
+    document.getElementById("finalResult").textContent =
+      "FINAL LPP SCORE = " + r(finalTotal) + " / 100";
 
     // Min 75 logic
     var minRequired = 75;
-    var warnEl = document.getElementById('minWarning');
-    warnEl.classList.remove('ok');
+    var warnEl = document.getElementById("minWarning");
+    warnEl.classList.remove("ok");
 
-    var statusChip = document.getElementById('statusChip');
+    var statusChip = document.getElementById("statusChip");
 
     if (finalTotal >= minRequired) {
-      warnEl.textContent = 'You meet the minimum recommended total of 75.';
-      warnEl.classList.add('ok');
-      statusChip.textContent = '🟢 On track';
-      statusChip.style.background = '#dcfce7';
-      statusChip.style.color = '#166534';
+      warnEl.textContent = "You meet the minimum recommended total of 75.";
+      warnEl.classList.add("ok");
+      statusChip.textContent = "On track";
+      statusChip.style.background = "#dcfce7";
+      statusChip.style.color = "#166534";
     } else {
       var diff = (minRequired - finalTotal).toFixed(2);
       var suggestions = [];
 
       if (totalX < 55) {
-        suggestions.push('• Increase X (research, grants, leadership/service). Focus on higher-quality publications, stronger grants, and M3–M5 activities.');
+        suggestions.push(
+          "- Increase X (research, grants, leadership and service). Focus on higher-quality publications, stronger grants, and M3-M5 activities."
+        );
       }
       if (yTotal < 15) {
-        suggestions.push('• Improve Y by documenting more impactful outputs and outcomes. Aim closer to 8–10 for Y1 and Y2 where appropriate.');
+        suggestions.push(
+          "- Improve Y by documenting more impactful outputs and outcomes. Aim closer to 8 to 10 for Y1 and Y2 where appropriate."
+        );
       }
       if (cpdScore < 8) {
-        suggestions.push('• Add CPD activities (courses, workshops, professional training) to raise Z towards 8–10.');
+        suggestions.push(
+          "- Add CPD activities (courses, workshops, professional training) to raise Z towards 8 to 10."
+        );
       }
       if (suggestions.length === 0) {
-        suggestions.push('• Small improvements across X, Y and Z (for example +1–2 points in several items) will help close the gap.');
+        suggestions.push(
+          "- Small improvements across X, Y and Z (for example plus 1 to 2 points in several items) will help close the gap."
+        );
       }
 
       warnEl.innerHTML =
-        'Score below minimum 75. You need approximately ' + diff +
-        ' more marks to reach 75.<br>' +
-        suggestions.join('<br>');
+        "Score below minimum 75. You need approximately " + diff +
+        " more marks to reach 75.<br>" +
+        suggestions.join("<br>");
 
-      // status chip levels
       if (finalTotal >= 65) {
-        statusChip.textContent = '🟡 Close to target';
-        statusChip.style.background = '#fef9c3';
-        statusChip.style.color = '#854d0e';
+        statusChip.textContent = "Close to target";
+        statusChip.style.background = "#fef9c3";
+        statusChip.style.color = "#854d0e";
       } else {
-        statusChip.textContent = '🔴 Below target';
-        statusChip.style.background = '#fee2e2';
-        statusChip.style.color = '#991b1b';
+        statusChip.textContent = "Below target";
+        statusChip.style.background = "#fee2e2";
+        statusChip.style.color = "#991b1b";
       }
     }
 
     // Progress bar towards 75
     var progress = Math.min(finalTotal, minRequired) / minRequired * 100;
-    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById("progressBar").style.width = progress + "%";
 
     // Low-score highlighting reset
-    ['x1Subtotal','x2Subtotal','mSubtotal','ySubtotal','cpdSubtotal'].forEach(function(id){
-      document.getElementById(id).classList.remove('low-score');
+    ["x1Subtotal","x2Subtotal","mSubtotal","ySubtotal","cpdSubtotal"].forEach(function(id){
+      document.getElementById(id).classList.remove("low-score");
     });
 
     // Apply low-score highlighting
-    if (totalX < 50) document.getElementById('mSubtotal').classList.add('low-score');
-    if (yTotal < 12) document.getElementById('ySubtotal').classList.add('low-score');
-    if (cpdScore < 6) document.getElementById('cpdSubtotal').classList.add('low-score');
+    if (totalX < 50) document.getElementById("mSubtotal").classList.add("low-score");
+    if (yTotal < 12) document.getElementById("ySubtotal").classList.add("low-score");
+    if (cpdScore < 6) document.getElementById("cpdSubtotal").classList.add("low-score");
 
-    // Update chart
-    updateXYZChart(totalX, yTotal, cpdScore);
+    // Derive M1, M2, M3, M4, M5, Y, Z scores for chart (0-100 scale)
+    var m1Score = (C4 + C5 + C6) / 3;    // M1 from Q1/Q2, Q1-Q4, grants
+    var m2Score = (C7 + C8) / 2;         // M2 from supervision and teaching
+    var yScore  = (yTotal / 20) * 100;   // 0-20 -> 0-100
+    var zScore  = (cpdScore / 10) * 100; // 0-10 -> 0-100
 
-    // Scroll to results
-    document.getElementById('results').scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
+    // Update 7-bar chart
+    updateXYZChart(m1Score, m2Score, m3v, m4v, m5v, yScore, zScore);
 
     // Re-run validation whenever calculation changes
     validateCase();
   }
 
   function resetForm() {
-    var ps = document.querySelectorAll('#results p');
-    ps.forEach(function(p){ p.textContent = ''; });
+    var ps = document.querySelectorAll("#results p");
+    ps.forEach(function(p){ p.textContent = ""; });
 
-    document.getElementById('finalScoreTop').textContent =
-      'FINAL LPP SCORE: 0.00 / 100';
+    document.getElementById("finalScoreTop").textContent =
+      "FINAL LPP SCORE: 0.00 / 100";
 
-    document.getElementById('x1Subtotal').innerHTML =
-      'X1 subtotal: <span class="value">0.00</span> / 60';
-    document.getElementById('x2Subtotal').innerHTML =
-      'X2 subtotal: <span class="value">0.00</span> / 40';
-    document.getElementById('mSubtotal').innerHTML =
-      'M3-M5 subtotal (best 2): <span class="value">0.00</span> / 28';
-    document.getElementById('ySubtotal').innerHTML =
-      'Y subtotal: <span class="value">0.00</span> / 20';
-    document.getElementById('cpdSubtotal').innerHTML =
-      'CPD subtotal: <span class="value">0.00</span> / 10';
+    document.getElementById("x1Subtotal").innerHTML =
+      "X1 subtotal: <span class=\"value\">0.00</span> / 60";
+    document.getElementById("x2Subtotal").innerHTML =
+      "X2 subtotal: <span class=\"value\">0.00</span> / 40";
+    document.getElementById("mSubtotal").innerHTML =
+      "M3-M5 subtotal (best 2): <span class=\"value\">0.00</span> / 28";
+    document.getElementById("ySubtotal").innerHTML =
+      "Y subtotal: <span class=\"value\">0.00</span> / 20";
+    document.getElementById("cpdSubtotal").innerHTML =
+      "CPD subtotal: <span class=\"value\">0.00</span> / 10";
 
-    var valBox = document.getElementById('caseValidation');
-    valBox.textContent = '';
-    valBox.classList.remove('ok');
+    var valBox = document.getElementById("caseValidation");
+    valBox.textContent = "";
+    valBox.classList.remove("ok");
 
-    var warnEl = document.getElementById('minWarning');
-    warnEl.textContent = '';
-    warnEl.classList.remove('ok');
+    var warnEl = document.getElementById("minWarning");
+    warnEl.textContent = "";
+    warnEl.classList.remove("ok");
 
-    var statusChip = document.getElementById('statusChip');
-    statusChip.textContent = '';
-    statusChip.style.background = '#e5e7eb';
-    statusChip.style.color = '#374151';
+    var statusChip = document.getElementById("statusChip");
+    statusChip.textContent = "";
+    statusChip.style.background = "#e5e7eb";
+    statusChip.style.color = "#374151";
 
-    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById("progressBar").style.width = "0%";
 
-    // Remove low-score highlight
-    ['x1Subtotal','x2Subtotal','mSubtotal','ySubtotal','cpdSubtotal'].forEach(function(id){
-      document.getElementById(id).classList.remove('low-score');
+    ["x1Subtotal","x2Subtotal","mSubtotal","ySubtotal","cpdSubtotal"].forEach(function(id){
+      document.getElementById(id).classList.remove("low-score");
     });
   }
 
   function resetToZero() {
-    var inputs = document.querySelectorAll('input[type="number"]');
+    var inputs = document.querySelectorAll("input[type=\"number\"]");
     inputs.forEach(function(i){
       i.value = 0;
-      i.classList.remove('error');
+      i.classList.remove("error");
     });
     resetForm();
     calculateLPP();
   }
 
   function setAllToMax() {
-    var inputs = document.querySelectorAll('input[type="number"]');
+    var inputs = document.querySelectorAll("input[type=\"number\"]");
     inputs.forEach(function(i){
       var id = i.id;
-      var maxVal = (id === 'y1' || id === 'y2' || id === 'cpd') ? 10 : 100;
+      var maxVal = (id === "y1" || id === "y2" || id === "cpd") ? 10 : 100;
       i.value = maxVal;
-      i.classList.remove('error');
+      i.classList.remove("error");
     });
     resetForm();
     calculateLPP();
@@ -1174,16 +1177,16 @@
     var body = document.getElementById(bodyId);
     var toggle = document.getElementById(toggleId);
     if (!body || !toggle) return;
-    if (body.style.display === 'none') {
-      body.style.display = 'block';
-      toggle.textContent = '▼';
+    if (body.style.display === "none") {
+      body.style.display = "block";
+      toggle.textContent = "[v]";
     } else {
-      body.style.display = 'none';
-      toggle.textContent = '▲';
+      body.style.display = "none";
+      toggle.textContent = "[^]";
     }
   }
 
-  window.addEventListener('DOMContentLoaded', resetToZero);
+  window.addEventListener("DOMContentLoaded", resetToZero);
 </script>
 
 </body>
