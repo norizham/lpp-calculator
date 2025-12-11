@@ -161,7 +161,26 @@
       color:#15803d;
     }
 
-    /* Right column tables */
+    /* Min total warning / status */
+    #minWarning {
+      margin-top:4px;
+      font-size:0.9em;
+      color:#b91c1c;
+      font-weight:normal;
+    }
+
+    #minWarning.ok {
+      color:#15803d;
+    }
+
+    /* Right column */
+    .right-logo {
+      display:block;
+      max-width:220px;
+      width:60%;
+      margin:0 auto 16px;
+    }
+
     .right-card {
       background:#ffffff;
       border-radius:10px;
@@ -366,6 +385,7 @@
         <!-- FINAL SCORE BELOW Z -->
         <div class="final-score-box">
           <p id="finalScoreTop">FINAL LPP SCORE: 0.00 / 100</p>
+          <p id="minWarning"></p>
         </div>
 
         <!-- Buttons -->
@@ -399,8 +419,10 @@
 
     </div>
 
-    <!-- RIGHT COLUMN: TEXT TABLES INSTEAD OF IMAGES -->
+    <!-- RIGHT COLUMN: LOGO + TEXT TABLES -->
     <div class="right-column">
+
+      <img src="logo.png" alt="Logo" class="right-logo">
 
       <div class="right-card">
         <h2>Publication Quality Marks (M1 - X2)</h2>
@@ -820,6 +842,38 @@
     document.getElementById('finalResult').textContent =
       'FINAL LPP SCORE = ' + r(finalTotal) + ' / 100';
 
+    // Minimum total 75 – warning & suggestions
+    var minRequired = 75;
+    var warnEl = document.getElementById('minWarning');
+    warnEl.classList.remove('ok');
+
+    if (finalTotal >= minRequired) {
+      warnEl.textContent =
+        'You meet the minimum recommended total of 75.';
+      warnEl.classList.add('ok');
+    } else {
+      var diff = (minRequired - finalTotal).toFixed(2);
+      var suggestions = [];
+
+      if (totalX < 55) {
+        suggestions.push('• Increase X (research, grants, leadership/service). Focus on higher-quality publications, stronger grants, and M3–M5 activities.');
+      }
+      if (yTotal < 15) {
+        suggestions.push('• Improve Y by documenting more impactful outputs and outcomes. Aim closer to 8–10 for Y1 and Y2 where appropriate.');
+      }
+      if (cpdScore < 8) {
+        suggestions.push('• Add CPD activities (courses, workshops, professional training) to raise Z towards 8–10.');
+      }
+      if (suggestions.length === 0) {
+        suggestions.push('• Small improvements across X, Y and Z (for example +1–2 points in several items) will help close the gap.');
+      }
+
+      warnEl.innerHTML =
+        'Score below minimum 75. You need approximately ' + diff +
+        ' more marks to reach 75.<br>' +
+        suggestions.join('<br>');
+    }
+
     // Re-run validation whenever calculation changes
     validateCase();
   }
@@ -845,6 +899,10 @@
     var valBox = document.getElementById('caseValidation');
     valBox.textContent = '';
     valBox.classList.remove('ok');
+
+    var warnEl = document.getElementById('minWarning');
+    warnEl.textContent = '';
+    warnEl.classList.remove('ok');
   }
 
   function resetToZero() {
