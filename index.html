@@ -30,7 +30,7 @@
     }
 
     .left-column { flex: 1.3; }
-    .right-column { flex: 1.7; text-align: right; }
+    .right-column { flex: 1.7; }
 
     .card {
       background: #ffffff;
@@ -140,38 +140,73 @@
 
     .results p { margin:4px 0; }
 
-    .right-column img {
-      width: 100%;
-      height: auto;
-      margin-bottom: 25px;
-      border-radius:8px;
-      padding:6px;
-      background:#fff;
-      box-shadow:0 3px 12px rgba(0,0,0,0.12);
-    }
-
-    .right-column img.logo {
-      width:60%;
-      max-width:220px;
-      margin-bottom:20px;
-    }
-
-    .right-column h3 {
-      margin:0 0 6px;
-      font-size:0.95em;
-      color:#111827;
-    }
-
-    @media (max-width:900px) {
-      .container { flex-direction: column; }
-      .right-column, .right-column h3 { text-align:center; }
-    }
-
     .disclaimer {
       text-align:center;
       margin-top:25px;
       color:#6b7280;
       font-size:0.8em;
+    }
+
+    #caseInfo {
+      font-size:0.9em;
+    }
+
+    #caseValidation {
+      margin-top:8px;
+      font-size:0.85em;
+      color:#b91c1c;
+    }
+
+    #caseValidation.ok {
+      color:#15803d;
+    }
+
+    /* Right column tables */
+    .right-card {
+      background:#ffffff;
+      border-radius:10px;
+      padding:16px 18px;
+      box-shadow:0 3px 10px rgba(0,0,0,0.08);
+      margin-bottom:16px;
+    }
+
+    .right-card h2 {
+      margin-top:0;
+      font-size:1.05em;
+      margin-bottom:8px;
+    }
+
+    table.info-table {
+      width:100%;
+      border-collapse: collapse;
+      font-size:0.85em;
+    }
+
+    .info-table th,
+    .info-table td {
+      border:1px solid #e5e7eb;
+      padding:6px 8px;
+      vertical-align: top;
+    }
+
+    .info-table th {
+      background:#1f2937;
+      color:#f9fafb;
+      text-align:left;
+    }
+
+    .info-table tbody tr:nth-child(even) {
+      background:#f9fafb;
+    }
+
+    .badge-note {
+      font-size:0.8em;
+      color:#6b7280;
+      margin-top:6px;
+    }
+
+    @media (max-width:900px) {
+      .container { flex-direction: column; }
     }
   </style>
 </head>
@@ -190,34 +225,59 @@
         <p>Please enter scores in the range of 0-100 (for X and M) and 0-10 (for Y and CPD).</p>
 
         <ul class="intro">
-          <li><strong>X1</strong>: M1 Quantity</li>
-          <li><strong>X2</strong>: M1 Quality</li>
-          <li><strong>M3, M4 & M5</strong>: Leadership, consultancy, service (best of 2)</li>
-          <li><strong>Y</strong>: Outcome and Narrative (0-10 each, total 20)</li>
+          <li><strong>X1</strong>: Quantitative output</li>
+          <li><strong>X2</strong>: Publication and grant quality</li>
+          <li><strong>M3-M5</strong>: Leadership, consultancy, service (best 2)</li>
+          <li><strong>Y</strong>: Work output and impact (0-10 each, total 20)</li>
           <li><strong>Z</strong>: CPD (0-10)</li>
         </ul>
 
+        <!-- CASE SELECTOR -->
+        <fieldset>
+          <legend>M1 &amp; M2 Requirements (Select Case)</legend>
+
+          <label for="mCase"><strong>Select Academic Case:</strong></label>
+          <select id="mCase" onchange="onCaseChange()" style="width:100%; padding:6px; margin-top:6px;">
+            <option value="">-- Choose Case --</option>
+            <option value="DS11">DS 11</option>
+            <option value="DS13">DS 13</option>
+            <option value="DS14">DS 14</option>
+            <option value="Khas">Khas</option>
+          </select>
+
+          <div id="caseInfo" style="
+            margin-top:12px;
+            padding:10px 15px;
+            border:1px solid #d1d5db;
+            background:#f9fafb;
+            border-radius:6px;
+            display:none;
+          "></div>
+
+          <div id="caseValidation"></div>
+        </fieldset>
+
         <!-- X1 -->
         <fieldset>
-          <legend>X1 - M1 & M2 Quantity ( /60)</legend>
+          <legend>X1 - Quantitative (max 60)</legend>
           <div class="grid">
-            <label>M1 Publication Q1 / Q2 (0-100)</label>
+            <label>M1 Q1 &amp; Q2 (C4)</label>
             <input id="x1_q1q2" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>M1 Publication Q1 / Q4 (0-100)</label>
+            <label>M1 Q1 to Q4 (C5)</label>
             <input id="x1_q1q4" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>Research Grants (0-100)</label>
+            <label>Grants (C6)</label>
             <input id="x1_geran" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>Supervision (0-100)</label>
+            <label>Supervision (C7)</label>
             <input id="x1_penyeliaan" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>Teaching (0-100)</label>
+            <label>Teaching (C8)</label>
             <input id="x1_pengajaran" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
           </div>
@@ -229,17 +289,17 @@
 
         <!-- X2 -->
         <fieldset>
-          <legend>X2 - M1 Quality ( /40)</legend>
+          <legend>X2 - Publication &amp; Grant Quality (max 40)</legend>
           <div class="grid">
-            <label> M1 Publication Quality Q1 / Q2 (0-100)</label>
+            <label>Publication Quality 1</label>
             <input id="x2_pub1" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>M1 Publication Quality Q1 / Q4 (0-100)</label>
+            <label>Publication Quality 2</label>
             <input id="x2_pub2" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>Grant Quality (0-100)</label>
+            <label>Grant Quality</label>
             <input id="x2_geran" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
           </div>
@@ -251,17 +311,17 @@
 
         <!-- M3-M5 -->
         <fieldset>
-          <legend>M3, M4, M5 - Quantity ( /28)</legend>
+          <legend>M3, M4, M5 - Qualitative (max 28)</legend>
           <div class="grid">
-            <label>M3 Leadership (0-100)</label>
+            <label>M3 Leadership</label>
             <input id="m3" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>M4 Consultancy (0-100)</label>
+            <label>M4 Consultancy</label>
             <input id="m4" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
 
-            <label>M5 Service (0-100)</label>
+            <label>M5 Service</label>
             <input id="m5" type="number" min="0" max="100" value="0"
                    title="Enter a value between 0 and 100" oninput="calculateLPP()">
           </div>
@@ -273,7 +333,7 @@
 
         <!-- Y -->
         <fieldset>
-          <legend>Y - Outcome & Narrative ( /20)</legend>
+          <legend>Y - Output &amp; Impact (max 20)</legend>
           <div class="grid">
             <label>Y1 Output (0-10)</label>
             <input id="y1" type="number" min="0" max="10" value="0"
@@ -291,7 +351,7 @@
 
         <!-- CPD -->
         <fieldset>
-          <legend>Z - CPD ( /10)</legend>
+          <legend>Z - CPD (max 10)</legend>
           <div class="grid">
             <label>CPD Score (0-10)</label>
             <input id="cpd" type="number" min="0" max="10" value="0"
@@ -334,29 +394,326 @@
 
       <!-- Disclaimer -->
       <p class="disclaimer">
-        Disclaimer: This calculator is provided as-is. Use at your own risk.
+        Disclaimer: This calculator and tables are illustrative tools only. Use at your own risk and refer to official LPP guidelines for final decisions.
       </p>
 
     </div>
 
-    <!-- RIGHT IMAGES -->
+    <!-- RIGHT COLUMN: TEXT TABLES INSTEAD OF IMAGES -->
     <div class="right-column">
-      <img src="logo.png" class="logo" alt="Logo">
 
-      <h3>Publication Marks</h3>
-      <img src="pub_table.png" class="table-img" alt="Publication Table">
+      <div class="right-card">
+        <h2>Publication Quality Marks (M1 - X2)</h2>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Ranking</th>
+              <th>Database / Output</th>
+              <th>Role</th>
+              <th>Marks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Index Journal Q1/Q2 WOS / Scopus</td>
+              <td>First / Corresponding / Sole Author</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Research Book (Index / MAPIM)</td>
+              <td>First Author</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Index Journal Q3/Q4 WOS / Scopus</td>
+              <td>First / Corresponding / Sole Author</td>
+              <td>70</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Research Book (Index / MAPIM)</td>
+              <td>Co-author</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Chapter in research book (Index / MAPIM)</td>
+              <td>First Author</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Chapter in research book (Index / MAPIM)</td>
+              <td>Co-author</td>
+              <td>25</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Index Journal other than WOS and Scopus (ERA / MyCite)</td>
+              <td>First / Corresponding / Sole Author</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Index Journal Q1/Q2 WOS / Scopus</td>
+              <td>Co-author</td>
+              <td>40</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Index Journal Q3/Q4 WOS / Scopus</td>
+              <td>Co-author</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Index Journal other than WOS and Scopus (ERA / MyCite)</td>
+              <td>Co-author</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Non Index Journal</td>
+              <td>First / Corresponding / Sole Author</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Indexed Proceedings</td>
+              <td>First / Corresponding / Sole Author</td>
+              <td>10</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="badge-note">
+          Note: Use two databases (WOS and Scopus) for Q1–Q4 classification.
+        </div>
+      </div>
+
+      <div class="right-card">
+        <h2>Grant Marks (M1 - X2)</h2>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Grant Status</th>
+              <th>Marks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Grant received / active as Main Researcher</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Grant applied as Main Researcher</td>
+              <td>40</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Grant received / active as Co-Researcher</td>
+              <td>30</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="badge-note">
+          Note: Only the highest mark among the three categories is counted.
+        </div>
+      </div>
+
     </div>
 
   </div>
 </div>
 
 <script>
+  // ---- CASE CONFIG (descriptions, autofill, minimum thresholds) ----
+  var CASE_CONFIG = {
+    "DS11": {
+      description: `
+        <strong>M1 (Research/Publications)</strong><br>
+        • 1 × Q1/Q2 WOS journal (Corresponding author – published)<br>
+        • 1 × Q3/Q4 WOS/Scopus journal (Corresponding author – published)<br>
+        • 1 × Research Grant (Project Leader, active)<br><br>
+        <strong>M2 (Teaching/Supervision)</strong><br>
+        • 5 hours academic teaching (UG/PG course/lab)<br>
+        • 1 × PG Supervision (active)<br><br>
+        <em>Auto-filled marks represent a reasonable target profile; adjust as needed.</em>
+      `,
+      autofill: {
+        x1_q1q2: 80,
+        x1_q1q4: 70,
+        x1_geran: 80,
+        x1_penyeliaan: 80,
+        x1_pengajaran: 80
+      },
+      min: {
+        x1_q1q2: 60,
+        x1_q1q4: 50,
+        x1_geran: 60,
+        x1_penyeliaan: 60,
+        x1_pengajaran: 60
+      }
+    },
+    "DS13": {
+      description: `
+        <strong>M1 (Research/Publications)</strong><br>
+        • 1 × Q1/Q2 WOS journal (Corresponding author – published)<br>
+        • 1 × Q3/Q4 WOS/Scopus journal (Corresponding author – published)<br>
+        • 1 × Research Grant (Project Leader, active)<br><br>
+        <strong>M2 (Teaching/Supervision)</strong><br>
+        • 5 hours academic teaching (UG/PG course/lab)<br>
+        • 1 × PG Supervision (active)<br><br>
+        <em>Auto-filled marks represent a reasonable target profile; adjust as needed.</em>
+      `,
+      autofill: {
+        x1_q1q2: 80,
+        x1_q1q4: 70,
+        x1_geran: 80,
+        x1_penyeliaan: 80,
+        x1_pengajaran: 80
+      },
+      min: {
+        x1_q1q2: 60,
+        x1_q1q4: 50,
+        x1_geran: 60,
+        x1_penyeliaan: 60,
+        x1_pengajaran: 60
+      }
+    },
+    "DS14": {
+      description: `
+        <strong>M1 (Research/Publications)</strong><br>
+        • 2 × Q1/Q2 WOS journals (Corresponding author – published)<br>
+        • 1 × Research Grant (Project Leader, active)<br><br>
+        <strong>M2 (Teaching/Supervision)</strong><br>
+        • 5 hours academic teaching (UG/PG course/lab)<br>
+        • 1 × PG Supervision (active)<br><br>
+        <em>Auto-filled marks represent a higher target profile for senior staff; adjust as needed.</em>
+      `,
+      autofill: {
+        x1_q1q2: 90,
+        x1_q1q4: 85,
+        x1_geran: 90,
+        x1_penyeliaan: 90,
+        x1_pengajaran: 90
+      },
+      min: {
+        x1_q1q2: 80,
+        x1_q1q4: 70,
+        x1_geran: 80,
+        x1_penyeliaan: 80,
+        x1_pengajaran: 80
+      }
+    },
+    "Khas": {
+      description: `
+        <strong>M1 (Research/Publications)</strong><br>
+        • 2 × Q1/Q2 WOS journals (Corresponding author – published)<br>
+        • 1 × Research Grant (Project Leader, active)<br><br>
+        <strong>M2 (Teaching/Supervision)</strong><br>
+        • 5 hours academic teaching (UG/PG course/lab)<br>
+        • 1 × PG Supervision (active)<br><br>
+        <em>Auto-filled marks represent a higher target profile for special cases; adjust as needed.</em>
+      `,
+      autofill: {
+        x1_q1q2: 90,
+        x1_q1q4: 85,
+        x1_geran: 90,
+        x1_penyeliaan: 90,
+        x1_pengajaran: 90
+      },
+      min: {
+        x1_q1q2: 80,
+        x1_q1q4: 70,
+        x1_geran: 80,
+        x1_penyeliaan: 80,
+        x1_pengajaran: 80
+      }
+    }
+  };
+
+  function fieldLabel(id) {
+    switch (id) {
+      case 'x1_q1q2': return 'M1 Q1/Q2 (C4)';
+      case 'x1_q1q4': return 'M1 Q1–Q4 (C5)';
+      case 'x1_geran': return 'M1 Grants (C6)';
+      case 'x1_penyeliaan': return 'M2 Supervision (C7)';
+      case 'x1_pengajaran': return 'M2 Teaching (C8)';
+      default: return id;
+    }
+  }
+
+  function onCaseChange() {
+    var sel = document.getElementById('mCase').value;
+    var infoBox = document.getElementById('caseInfo');
+    var valBox = document.getElementById('caseValidation');
+    valBox.textContent = '';
+    valBox.classList.remove('ok');
+
+    if (!sel || !CASE_CONFIG[sel]) {
+      infoBox.style.display = 'none';
+      infoBox.innerHTML = '';
+      calculateLPP();
+      return;
+    }
+
+    var cfg = CASE_CONFIG[sel];
+    infoBox.style.display = 'block';
+    infoBox.innerHTML = cfg.description;
+
+    // Auto-fill suggested marks for M1 and M2
+    Object.keys(cfg.autofill).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.value = cfg.autofill[id];
+        el.classList.remove('error');
+      }
+    });
+
+    calculateLPP();
+    validateCase(); // run validation immediately
+  }
+
+  function validateCase() {
+    var sel = document.getElementById('mCase').value;
+    var valBox = document.getElementById('caseValidation');
+    valBox.textContent = '';
+    valBox.classList.remove('ok');
+
+    if (!sel || !CASE_CONFIG[sel]) return;
+
+    var cfgMin = CASE_CONFIG[sel].min;
+    var messages = [];
+
+    Object.keys(cfgMin).forEach(function(id) {
+      var current = parseFloat(document.getElementById(id).value) || 0;
+      var minVal = cfgMin[id];
+      if (current < minVal) {
+        messages.push('• ' + fieldLabel(id) + ': current ' + current + ', recommended minimum ' + minVal);
+      }
+    });
+
+    if (messages.length === 0) {
+      valBox.textContent = 'Current marks meet or exceed the recommended minimum for case ' + sel + '.';
+      valBox.classList.add('ok');
+    } else {
+      valBox.innerHTML = '<strong>Warning:</strong><br>' + messages.join('<br>');
+    }
+  }
+
+  // ---- Core calculator ----
+
   // Clamp values: 0-100 for most, 0-10 for Y1, Y2, CPD
   function val(id) {
     var el = document.getElementById(id);
     var v = parseFloat(el.value);
 
-    // Y1, Y2, CPD use 0-10; others use 0-100
     var maxVal = (id === 'y1' || id === 'y2' || id === 'cpd') ? 10 : 100;
 
     var outOfRange = false;
@@ -462,6 +819,9 @@
 
     document.getElementById('finalResult').textContent =
       'FINAL LPP SCORE = ' + r(finalTotal) + ' / 100';
+
+    // Re-run validation whenever calculation changes
+    validateCase();
   }
 
   function resetForm() {
@@ -481,6 +841,10 @@
       'Y subtotal: <span class="value">0.00</span> / 20';
     document.getElementById('cpdSubtotal').innerHTML =
       'CPD subtotal: <span class="value">0.00</span> / 10';
+
+    var valBox = document.getElementById('caseValidation');
+    valBox.textContent = '';
+    valBox.classList.remove('ok');
   }
 
   function resetToZero() {
@@ -509,5 +873,4 @@
 </script>
 
 </body>
-
 </html>
