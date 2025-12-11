@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LPP Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Chart.js for X/Y/Z bar chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     * { box-sizing: border-box; }
@@ -12,7 +15,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #e5f0ff, #f5f7fb);
+      background: linear-gradient(135deg,#e5f0ff,#f5f7fb);
       color: #111827;
     }
 
@@ -25,8 +28,8 @@
     /* HEADER */
     .header {
       background: #ffffff;
-      border-radius: 12px;
-      padding: 12px 18px;
+      border-radius: 14px;
+      padding: 14px 18px;
       box-shadow: 0 4px 14px rgba(15, 23, 42, 0.10);
       display: flex;
       align-items: center;
@@ -35,30 +38,24 @@
     }
 
     .header-logo {
-      width: 70px;
+      width: 80px;
       height: auto;
       flex-shrink: 0;
     }
 
-    .header-text {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
     .header-text h1 {
       margin: 0;
-      font-size: 1.7em;
+      font-size: 1.75em;
       letter-spacing: 0.02em;
     }
 
     .header-text p {
-      margin: 0;
+      margin: 4px 0 0;
       font-size: 0.9em;
       color: #4b5563;
     }
 
-    /* MAIN LAYOUT */
+    /* LAYOUT */
     .container {
       display: flex;
       justify-content: space-between;
@@ -72,9 +69,10 @@
 
     .card {
       background: #ffffff;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 18px 20px 20px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.10);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
+      margin-bottom: 18px;
     }
 
     h2.section-title {
@@ -90,9 +88,9 @@
     }
 
     .intro-list {
-      font-size: 0.88em;
+      font-size: 0.9em;
       color: #4b5563;
-      margin: 4px 0 12px 16px;
+      margin: 4px 0 12px 18px;
       padding-left: 4px;
     }
 
@@ -102,25 +100,22 @@
 
     fieldset {
       margin-bottom: 14px;
-      padding: 10px 14px 10px;
+      padding: 12px 14px 14px;
       border-radius: 10px;
       border: 1px solid #d1d5db;
       background: #f9fafb;
-      border-left: 4px solid #2563eb;
     }
 
     legend {
       font-weight: bold;
       font-size: 0.92em;
-      text-transform: uppercase;
-      color: #111827;
-      padding: 0 4px;
+      padding: 0 6px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 1.4fr 110px;
-      gap: 6px 8px;
+      grid-template-columns: 1.4fr 120px;
+      gap: 8px 10px;
       align-items: center;
     }
 
@@ -131,8 +126,8 @@
 
     input[type="number"] {
       width: 100%;
-      padding: 5px 6px;
-      border-radius: 6px;
+      padding: 6px 7px;
+      border-radius: 8px;
       border: 1px solid #cbd5e1;
       font-size: 0.9em;
       background: #ffffff;
@@ -141,7 +136,7 @@
     input[type="number"]:focus {
       outline: none;
       border-color: #2563eb;
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 0 0 1px rgba(37,99,235,0.3);
     }
 
     input[type="number"].error {
@@ -157,20 +152,33 @@
       text-align: right;
     }
 
-    .section-subtotal span.value {
-      color: #2563eb;
+    .section-subtotal span.value { color: #2563eb; }
+
+    .low-score {
+      background: #fef2f2 !important;
+      border-color: #fecaca !important;
     }
 
     .final-score-box {
       background: #eef2ff;
       border: 1px solid #c7d2fe;
       padding: 10px 14px;
-      border-radius: 10px;
+      border-radius: 12px;
       margin-top: 14px;
       margin-bottom: 12px;
       font-size: 1em;
       font-weight: bold;
       color: #1e3a8a;
+    }
+
+    #statusChip {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.85em;
+      background: #e5e7eb;
+      color: #374151;
     }
 
     #minWarning {
@@ -182,6 +190,21 @@
 
     #minWarning.ok {
       color: #15803d;
+    }
+
+    #progressContainer {
+      margin-top: 8px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      height: 10px;
+    }
+
+    #progressBar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg,#22c55e,#16a34a);
+      transition: width 0.4s ease;
     }
 
     .buttons {
@@ -198,10 +221,11 @@
       border: 1px solid #2563eb;
       background: #2563eb;
       color: #ffffff;
-      font-size: 0.88em;
+      font-size: 0.9em;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
     }
 
     button.secondary {
@@ -217,6 +241,17 @@
     button.warning {
       background: #f97316;
       border-color: #ea580c;
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(15,23,42,0.2);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: none;
     }
 
     .results {
@@ -242,7 +277,7 @@
       text-align: center;
       margin-top: 18px;
       color: #6b7280;
-      font-size: 0.78em;
+      font-size: 0.8em;
     }
 
     #caseInfo {
@@ -262,29 +297,44 @@
     /* RIGHT COLUMN */
     .right-card {
       background: #ffffff;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 14px 16px 16px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.10);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
       margin-bottom: 14px;
     }
 
     .right-card h2 {
       margin-top: 0;
       font-size: 1.02em;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
+      cursor: pointer;
+    }
+
+    .right-card small {
+      display: block;
+      margin-bottom: 4px;
+      color: #4b5563;
+      font-size: 0.8em;
     }
 
     .right-card h2 span.icon {
       font-size: 1.1em;
     }
 
+    .card-toggle {
+      margin-left: auto;
+      font-size: 0.9em;
+      color: #6b7280;
+    }
+
     table.info-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.82em;
+      margin-top: 8px;
     }
 
     .info-table th,
@@ -311,13 +361,6 @@
       margin-top: 6px;
     }
 
-    .right-card small {
-      display: block;
-      margin-bottom: 4px;
-      color: #4b5563;
-      font-size: 0.8em;
-    }
-
     @media (max-width: 900px) {
       .container {
         flex-direction: column;
@@ -341,7 +384,7 @@
 
   <div class="container">
 
-    <!-- LEFT PANEL: CALCULATOR -->
+    <!-- LEFT: MAIN CALCULATOR -->
     <div class="left-column">
       <div class="card">
 
@@ -475,7 +518,7 @@
           </p>
         </fieldset>
 
-        <!-- CPD -->
+        <!-- Z -->
         <fieldset>
           <legend>Z - CPD (max 10)</legend>
           <div class="grid">
@@ -489,13 +532,17 @@
           </p>
         </fieldset>
 
-        <!-- FINAL SCORE BELOW Z -->
+        <!-- FINAL SCORE -->
         <div class="final-score-box">
           <p id="finalScoreTop">FINAL LPP SCORE: 0.00 / 100</p>
+          <p id="statusChip"></p>
           <p id="minWarning"></p>
+          <div id="progressContainer">
+            <div id="progressBar"></div>
+          </div>
         </div>
 
-        <!-- Buttons -->
+        <!-- BUTTONS -->
         <div class="buttons">
           <button onclick="calculateLPP()"><span>▶</span><span>Calculate</span></button>
           <button class="secondary" onclick="resetForm()"><span>🧹</span><span>Clear outputs</span></button>
@@ -503,7 +550,7 @@
           <button class="warning" onclick="setAllToMax()"><span>⬆</span><span>Set all inputs to max</span></button>
         </div>
 
-        <!-- Detailed Results -->
+        <!-- RESULTS -->
         <div class="results" id="results">
           <h3>Detailed Results</h3>
           <p id="x1Result"></p>
@@ -515,143 +562,157 @@
           <p id="cpdResult"></p>
           <p id="breakdownResult"></p>
           <p id="finalResult"></p>
+
+          <canvas id="xyzChart" style="margin-top:8px; max-height:180px;"></canvas>
         </div>
 
       </div>
 
-      <!-- Disclaimer -->
       <p class="disclaimer">
         Disclaimer: This calculator and tables are illustrative tools only. Use at your own risk and refer to official LPP guidelines for final decisions.
       </p>
-
     </div>
 
-    <!-- RIGHT COLUMN: TABLES -->
+    <!-- RIGHT: TABLES -->
     <div class="right-column">
 
+      <!-- PUBLICATION TABLE -->
       <div class="right-card">
-        <h2><span class="icon">📚</span><span>Publication Quality Marks (M1 – X2)</span></h2>
+        <h2 onclick="toggleCard('pubCardBody','pubCardToggle')">
+          <span class="icon">📚</span>
+          <span>Publication Quality Marks (M1 – X2)</span>
+          <span class="card-toggle" id="pubCardToggle">▼</span>
+        </h2>
         <small>Use this as a reference when assigning publication scores in X1 and X2.</small>
-        <table class="info-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Database / Output</th>
-              <th>Role</th>
-              <th>Marks</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Index Journal Q1/Q2 WOS / Scopus</td>
-              <td>First / Corresponding / Sole Author</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Research Book (Index / MAPIM)</td>
-              <td>First Author</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Index Journal Q3/Q4 WOS / Scopus</td>
-              <td>First / Corresponding / Sole Author</td>
-              <td>70</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Research Book (Index / MAPIM)</td>
-              <td>Co-author</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Chapter in research book (Index / MAPIM)</td>
-              <td>First Author</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>Chapter in research book (Index / MAPIM)</td>
-              <td>Co-author</td>
-              <td>25</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>Index Journal other than WOS and Scopus (ERA / MyCite)</td>
-              <td>First / Corresponding / Sole Author</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td>Index Journal Q1/Q2 WOS / Scopus</td>
-              <td>Co-author</td>
-              <td>40</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Index Journal Q3/Q4 WOS / Scopus</td>
-              <td>Co-author</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Index Journal other than WOS and Scopus (ERA / MyCite)</td>
-              <td>Co-author</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>11</td>
-              <td>Non Index Journal</td>
-              <td>First / Corresponding / Sole Author</td>
-              <td>30</td>
-            </tr>
-            <tr>
-              <td>12</td>
-              <td>Indexed Proceedings</td>
-              <td>First / Corresponding / Sole Author</td>
-              <td>10</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="badge-note">
-          Note: Use WOS and Scopus together to classify Q1–Q4 journals.
+        <div id="pubCardBody">
+          <table class="info-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Database / Output</th>
+                <th>Role</th>
+                <th>Marks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Index Journal Q1/Q2 WOS / Scopus</td>
+                <td>First / Corresponding / Sole Author</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Research Book (Index / MAPIM)</td>
+                <td>First Author</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Index Journal Q3/Q4 WOS / Scopus</td>
+                <td>First / Corresponding / Sole Author</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Research Book (Index / MAPIM)</td>
+                <td>Co-author</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Chapter in research book (Index / MAPIM)</td>
+                <td>First Author</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Chapter in research book (Index / MAPIM)</td>
+                <td>Co-author</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Index Journal other than WOS and Scopus (ERA / MyCite)</td>
+                <td>First / Corresponding / Sole Author</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Index Journal Q1/Q2 WOS / Scopus</td>
+                <td>Co-author</td>
+                <td>40</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Index Journal Q3/Q4 WOS / Scopus</td>
+                <td>Co-author</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Index Journal other than WOS and Scopus (ERA / MyCite)</td>
+                <td>Co-author</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Non Index Journal</td>
+                <td>First / Corresponding / Sole Author</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Indexed Proceedings</td>
+                <td>First / Corresponding / Sole Author</td>
+                <td>10</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="badge-note">
+            Note: Use WOS and Scopus together to classify Q1–Q4 journals.
+          </div>
         </div>
       </div>
 
+      <!-- GRANT TABLE -->
       <div class="right-card">
-        <h2><span class="icon">💰</span><span>Grant Marks (M1 – X2)</span></h2>
+        <h2 onclick="toggleCard('grantCardBody','grantCardToggle')">
+          <span class="icon">💰</span>
+          <span>Grant Marks (M1 – X2)</span>
+          <span class="card-toggle" id="grantCardToggle">▼</span>
+        </h2>
         <small>Reference for assigning grant-related marks in X1 and X2.</small>
-        <table class="info-table">
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Grant Status</th>
-              <th>Marks</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Grant received / active as Main Researcher</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Grant applied as Main Researcher</td>
-              <td>40</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Grant received / active as Co-Researcher</td>
-              <td>30</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="badge-note">
-          Note: Only the highest applicable grant mark is typically counted.
+        <div id="grantCardBody">
+          <table class="info-table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Grant Status</th>
+                <th>Marks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Grant received / active as Main Researcher</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Grant applied as Main Researcher</td>
+                <td>40</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Grant received / active as Co-Researcher</td>
+                <td>30</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="badge-note">
+            Note: Only the highest applicable grant mark is typically counted.
+          </div>
         </div>
       </div>
 
@@ -769,11 +830,11 @@
 
   function fieldLabel(id) {
     switch (id) {
-      case 'x1_q1q2': return 'M1 Q1/Q2 (C4)';
-      case 'x1_q1q4': return 'M1 Q1–Q4 (C5)';
-      case 'x1_geran': return 'M1 Grants (C6)';
-      case 'x1_penyeliaan': return 'M2 Supervision (C7)';
-      case 'x1_pengajaran': return 'M2 Teaching (C8)';
+      case 'x1_q1q2': return 'M1 Q1 & Q2 (0-100)';
+      case 'x1_q1q4': return 'M1 Q1 to Q4 (0-100)';
+      case 'x1_geran': return 'Grants (0-100)';
+      case 'x1_penyeliaan': return 'Supervision (0-100)';
+      case 'x1_pengajaran': return 'Teaching (0-100)';
       default: return id;
     }
   }
@@ -836,7 +897,7 @@
     }
   }
 
-  // Clamp values: 0-100 for most, 0-10 for Y1, Y2, CPD
+  // Clamp values
   function val(id) {
     var el = document.getElementById(id);
     var v = parseFloat(el.value);
@@ -854,6 +915,41 @@
 
     el.value = v;
     return v;
+  }
+
+  var xyzChart;
+
+  function updateXYZChart(totalX, yTotal, cpdScore) {
+    var canvas = document.getElementById('xyzChart');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    if (!xyzChart) {
+      xyzChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['X (max 70)', 'Y (max 20)', 'Z (max 10)'],
+          datasets: [{
+            label: 'Score',
+            data: [totalX, yTotal, cpdScore]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              suggestedMax: 70
+            }
+          }
+        }
+      });
+    } else {
+      xyzChart.data.datasets[0].data = [totalX, yTotal, cpdScore];
+      xyzChart.update();
+    }
   }
 
   function calculateLPP() {
@@ -886,7 +982,7 @@
     // Quantitative component (42%)
     var comp42 = ((x1Raw + x2Raw) / 100) * 42;
 
-    // M3-M5 best 2 of 3
+    // M3-M5 best 2
     var arr = [val('m3'), val('m4'), val('m5')].sort(function(a,b){return b-a;});
     var mBestAvg = (arr[0] + arr[1]) / 2;
     var mScore = (mBestAvg / 100) * 28;
@@ -896,7 +992,7 @@
 
     var totalX = comp42 + mScore; // up to 70
 
-    // Y: each 0-10, total 0-20
+    // Y
     var y1v = val('y1');
     var y2v = val('y2');
     var yTotal = y1v + y2v;
@@ -904,7 +1000,7 @@
     document.getElementById('ySubtotal').innerHTML =
       'Y subtotal: <span class="value">' + r(yTotal) + '</span> / 20';
 
-    // CPD: 0-10
+    // CPD
     var cpdScore = val('cpd');
 
     document.getElementById('cpdSubtotal').innerHTML =
@@ -913,48 +1009,45 @@
     // FINAL TOTAL
     var finalTotal = totalX + yTotal + cpdScore;
 
-    // Top final score
+    // Final score text
     document.getElementById('finalScoreTop').textContent =
       'FINAL LPP SCORE: ' + r(finalTotal) + ' / 100';
 
-    // Detailed panel
+    // Detailed results
     document.getElementById('x1Result').textContent =
       'X1 = ' + r(x1Raw) + ' / 60 (avg input = ' + r(x1Avg) + ')';
-
     document.getElementById('x2Result').textContent =
       'X2 = ' + r(x2Raw) + ' / 40';
-
     document.getElementById('comp42Result').textContent =
       'Quantitative Component (42%) = ' + r(comp42) + ' / 42';
-
     document.getElementById('m3m4m5Result').textContent =
       'M3-M5 (best 2 of 3) = ' + r(mScore) + ' / 28';
-
     document.getElementById('totalXResult').textContent =
       'Total X = ' + r(totalX) + ' / 70';
-
     document.getElementById('y1y2Result').textContent =
       'Y total = ' + r(yTotal) + ' / 20';
-
     document.getElementById('cpdResult').textContent =
       'CPD = ' + r(cpdScore) + ' / 10';
-
     document.getElementById('breakdownResult').textContent =
       'Contribution: X = ' + r(totalX) +
       ', Y = ' + r(yTotal) +
       ', Z = ' + r(cpdScore);
-
     document.getElementById('finalResult').textContent =
       'FINAL LPP SCORE = ' + r(finalTotal) + ' / 100';
 
-    // Minimum total 75 – warning & suggestions
+    // Min 75 logic
     var minRequired = 75;
     var warnEl = document.getElementById('minWarning');
     warnEl.classList.remove('ok');
 
+    var statusChip = document.getElementById('statusChip');
+
     if (finalTotal >= minRequired) {
       warnEl.textContent = 'You meet the minimum recommended total of 75.';
       warnEl.classList.add('ok');
+      statusChip.textContent = '🟢 On track';
+      statusChip.style.background = '#dcfce7';
+      statusChip.style.color = '#166534';
     } else {
       var diff = (minRequired - finalTotal).toFixed(2);
       var suggestions = [];
@@ -976,7 +1069,41 @@
         'Score below minimum 75. You need approximately ' + diff +
         ' more marks to reach 75.<br>' +
         suggestions.join('<br>');
+
+      // status chip levels
+      if (finalTotal >= 65) {
+        statusChip.textContent = '🟡 Close to target';
+        statusChip.style.background = '#fef9c3';
+        statusChip.style.color = '#854d0e';
+      } else {
+        statusChip.textContent = '🔴 Below target';
+        statusChip.style.background = '#fee2e2';
+        statusChip.style.color = '#991b1b';
+      }
     }
+
+    // Progress bar towards 75
+    var progress = Math.min(finalTotal, minRequired) / minRequired * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+
+    // Low-score highlighting reset
+    ['x1Subtotal','x2Subtotal','mSubtotal','ySubtotal','cpdSubtotal'].forEach(function(id){
+      document.getElementById(id).classList.remove('low-score');
+    });
+
+    // Apply low-score highlighting
+    if (totalX < 50) document.getElementById('mSubtotal').classList.add('low-score');
+    if (yTotal < 12) document.getElementById('ySubtotal').classList.add('low-score');
+    if (cpdScore < 6) document.getElementById('cpdSubtotal').classList.add('low-score');
+
+    // Update chart
+    updateXYZChart(totalX, yTotal, cpdScore);
+
+    // Scroll to results
+    document.getElementById('results').scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
 
     // Re-run validation whenever calculation changes
     validateCase();
@@ -1007,6 +1134,18 @@
     var warnEl = document.getElementById('minWarning');
     warnEl.textContent = '';
     warnEl.classList.remove('ok');
+
+    var statusChip = document.getElementById('statusChip');
+    statusChip.textContent = '';
+    statusChip.style.background = '#e5e7eb';
+    statusChip.style.color = '#374151';
+
+    document.getElementById('progressBar').style.width = '0%';
+
+    // Remove low-score highlight
+    ['x1Subtotal','x2Subtotal','mSubtotal','ySubtotal','cpdSubtotal'].forEach(function(id){
+      document.getElementById(id).classList.remove('low-score');
+    });
   }
 
   function resetToZero() {
@@ -1029,6 +1168,19 @@
     });
     resetForm();
     calculateLPP();
+  }
+
+  function toggleCard(bodyId, toggleId) {
+    var body = document.getElementById(bodyId);
+    var toggle = document.getElementById(toggleId);
+    if (!body || !toggle) return;
+    if (body.style.display === 'none') {
+      body.style.display = 'block';
+      toggle.textContent = '▼';
+    } else {
+      body.style.display = 'none';
+      toggle.textContent = '▲';
+    }
   }
 
   window.addEventListener('DOMContentLoaded', resetToZero);
